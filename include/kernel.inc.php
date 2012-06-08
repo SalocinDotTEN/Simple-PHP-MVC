@@ -1,44 +1,15 @@
 <?php
 	/*
-		Cassandra Cluster Admin
-		
-		@author Sébastien Giroux
-		@copyright All rights reserved - 2011
+		Based on Cassandra Cluster Admin by Sébastien Giroux
 	*/	
-
-	require('include/autoload.php');	
-	
-	use phpcassa\SystemManager;
-	
 	require('include/lang/english.php');
-	
-	require('helper/ClusterHelper.php');
-	require('helper/ColumnFamilyHelper.php');
-	require('helper/MX4J.php');
 	
 	require('conf.inc.php');
 
 	error_reporting(E_ALL);
 	
-	define('MINIMUM_THRIFT_API_VERSION_FOR_COUNTERS','19.10.0');
-	define('THRIFT_API_VERSION_FOR_CASSANDRA_1_0','19.20.0');
-	
-	$cluster_helper = new ClusterHelper($CASSANDRA_CLUSTERS);
-	
 	session_start();
 	
-	// Make sure the cluster index in the session still exists in the config array
-	if ($cluster_helper->getClusterIndex() > $cluster_helper->getClustersCount() - 1) {
-		$_SESSION['cluster_index'] = 0;
-	}
-	
-	try {	
-		$sys_manager = new SystemManager($cluster_helper->getRandomNodeForCurrentCluster(),$cluster_helper->getCredentialsForCurrentCluster(),1500,1500);
-	}
-	catch (TException $e) {
-		die(getHTML('header.php').getHTML('server_error.php',array('error_message' => displayErrorMessage('cassandra_server_error',array('error_message' => $e->getMessage())))).getHTML('footer.php'));
-	}
-
 	/*
 		Get the specified view and replace the php variables
 	*/	
