@@ -1,9 +1,7 @@
 <?php
 	/*
-		Cassandra Cluster Admin
-		
-		@author Sébastien Giroux
-		@copyright All rights reserved - 2011
+		Based on Cassandra Cluster Admin by Sébastien Giroux
+		Modified by Salocin.TEN
 	*/
 	
 	if (CCA_LOGIN_REQUIRED && (!isset($_SESSION['cca_login']) || $_SESSION['cca_login'] !== md5(CCA_USERNAME.CCA_PASSWORD))) {
